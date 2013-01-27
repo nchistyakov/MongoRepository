@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>MongoRepository</id>
+        <version>1.0.0</version>
+        <title />
+        <authors/>
+        <owners />
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>My package description.</description>
+        <language>en-GB</language>
+        <dependencies>
+            <dependency id="mongocsharpdriver" version="1.7" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\src\MongoRepository\bin\Debug\MongoRepository.dll" target="lib\MongoRepository.dll" />
+    </files>
+</package>
