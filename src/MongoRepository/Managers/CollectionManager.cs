@@ -1,6 +1,6 @@
 ﻿using System;
 using MongoDB.Driver;
-using MongoRepository.NamingStrategies;
+using MongoRepository.Conventions;
 
 namespace MongoRepository.Managers
 {

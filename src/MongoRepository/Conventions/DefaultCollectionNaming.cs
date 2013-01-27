@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MongoRepository.NamingStrategies
+﻿namespace MongoRepository.Conventions
 {
     public class DefaultCollectionNaming : ICollectionNamingStrategy
     {

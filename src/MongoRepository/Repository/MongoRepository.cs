@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 using MongoRepository.Data;
 using MongoRepository.Managers;
 
@@ -14,72 +16,77 @@ namespace MongoRepository.Repository
 
         public MongoRepository(ICollectionManager collectionManager)
         {
-            this._collection = collectionManager.GetCollection<TEntity>();
+            _collection = collectionManager.GetCollection<TEntity>();
         }
 
         public TEntity GetById(string id)
         {
-            return this._collection.FindOneByIdAs<TEntity>(id);
+            return _collection.FindOneByIdAs<TEntity>(id);
         }
 
         public TEntity GetSingle(Expression<Func<TEntity, bool>> criteria)
         {
-            throw new NotImplementedException();
+            return _collection.AsQueryable().Where(criteria).FirstOrDefault();
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _collection.AsQueryable();
         }
 
         public IQueryable<TEntity> All(Expression<Func<TEntity, bool>> criteria)
         {
-            throw new NotImplementedException();
+            return _collection.AsQueryable().Where(criteria);
         }
 
         public TEntity Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            _collection.Insert(entity);
+            return entity;
         }
 
         public void Add(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _collection.InsertBatch(entities);
         }
 
         public TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _collection.Save(entity);
+            return entity;
         }
 
         public void Update(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            foreach (var entity in entities)
+            {
+                _collection.Save(entity);
+            }
         }
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            _collection.Remove(Query.EQ("_Id", id));
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            this.Delete(entity.Id);
         }
 
         public void DeleteAll()
         {
-            throw new NotImplementedException();
+            _collection.RemoveAll();
         }
 
         public bool Exists(Expression<Func<TEntity, bool>> criteria)
         {
-            throw new NotImplementedException();
+            return _collection.AsQueryable().Any(criteria);
         }
 
         public long Count()
         {
-            throw new NotImplementedException();
+            return _collection.Count();
         }
     }
 }
