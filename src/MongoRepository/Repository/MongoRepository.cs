@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
-using MongoRepository.Data;
 using MongoRepository.Managers;
+using MongoRepository.ObjectModel;
 
 namespace MongoRepository.Repository
 {
@@ -16,6 +16,11 @@ namespace MongoRepository.Repository
 
         public MongoRepository(ICollectionManager collectionManager)
         {
+            if (collectionManager == null)
+            {
+                throw new ArgumentException("collectionManager");
+            }
+
             _collection = collectionManager.GetCollection<TEntity>();
         }
 
@@ -34,7 +39,7 @@ namespace MongoRepository.Repository
             return _collection.AsQueryable();
         }
 
-        public IQueryable<TEntity> All(Expression<Func<TEntity, bool>> criteria)
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> criteria)
         {
             return _collection.AsQueryable().Where(criteria);
         }
@@ -66,7 +71,7 @@ namespace MongoRepository.Repository
 
         public void Delete(string id)
         {
-            _collection.Remove(Query.EQ("_Id", id));
+            _collection.Remove(Query.EQ("_id", id));
         }
 
         public void Delete(TEntity entity)

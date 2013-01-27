@@ -1,4 +1,6 @@
-﻿namespace MongoRepository.Conventions
+﻿using System;
+
+namespace MongoRepository.Conventions
 {
     public class DefaultCollectionNaming : ICollectionNamingStrategy
     {

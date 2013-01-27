@@ -1,11 +1,10 @@
-﻿using MongoDB.Driver;
-using MongoRepository.Conventions;
+﻿using System;
+using MongoDB.Driver;
 
 namespace MongoRepository.Managers
 {
     public interface ICollectionManager
     {
-        ICollectionNamingStrategy NamingStrategy { get; set; }
         MongoCollection<TEntity> GetCollection<TEntity>();
     }
 }

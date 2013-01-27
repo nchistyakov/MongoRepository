@@ -6,19 +6,31 @@ namespace MongoRepository.Managers
 {
     public class CollectionManager : ICollectionManager
     {
-        private readonly MongoDatabase _mongoDatabase;
-
-        public ICollectionNamingStrategy NamingStrategy { get; set; }
+        private MongoDatabase _mongoDatabase;
+        private ICollectionNamingStrategy _namingStrategy;
 
         public CollectionManager(MongoDatabase mongoDatabase)
+            : this(mongoDatabase, new DefaultCollectionNaming()) { }
+
+        public CollectionManager(MongoDatabase mongoDatabase, DefaultCollectionNaming collectionNaming)
         {
+            if (mongoDatabase == null)
+            {
+                throw new ArgumentException("mongoDatabase");
+            }
+
+            if (collectionNaming == null)
+            {
+                throw new ArgumentException("collectionNaming");
+            }
+
             _mongoDatabase = mongoDatabase;
-            this.NamingStrategy = new DefaultCollectionNaming();
+            _namingStrategy = collectionNaming;
         }
 
         public MongoCollection<TEntity> GetCollection<TEntity>()
         {
-            var collectionName = this.NamingStrategy.Apply(typeof (TEntity).Name);
+            var collectionName = _namingStrategy.Apply(typeof (TEntity).Name);
             return _mongoDatabase.GetCollection<TEntity>(collectionName);
         }
     }

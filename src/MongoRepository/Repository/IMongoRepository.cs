@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using MongoRepository.Data;
+using MongoRepository.ObjectModel;
 
 namespace MongoRepository.Repository
 {
@@ -14,7 +14,7 @@ namespace MongoRepository.Repository
         
         IQueryable<TEntity> GetAll();
         
-        IQueryable<TEntity> All(Expression<Func<TEntity, bool>> criteria);
+        IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> criteria);
         
         TEntity Add(TEntity entity);
         
