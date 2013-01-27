@@ -6,7 +6,7 @@
         <title />
         <authors>Luca</authors>
         <owners />
-        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>My package description.</description>
         <language>en-GB</language>
         <dependencies>
