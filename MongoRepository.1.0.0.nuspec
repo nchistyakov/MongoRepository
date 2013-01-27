@@ -4,7 +4,7 @@
         <id>MongoRepository</id>
         <version>1.0.0</version>
         <title />
-        <authors/>Luca</authors>
+        <authors>Luca</authors>
         <owners />
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>My package description.</description>
