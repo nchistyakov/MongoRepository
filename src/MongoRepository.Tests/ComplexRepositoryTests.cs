@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoRepository.Managers;
 using MongoRepository.ObjectModel;
-using NUnit.Framework;
 using MongoRepository.Repository;
+using NUnit.Framework;
 
 namespace MongoRepository.Tests
 {
     [TestFixture]
-    public class RepositoryTests : BaseTestFixture
+    public class ComplexRepositoryTests : BaseTestFixture
     {
         private class ClassTest : Entity
         {
             public int IntProperty { get; set; }
+            public IList<ChildClassTest> ChildClassTests { get; set; }
+        }
+
+        private class ChildClassTest
+        {
+            public string StringProperty { get; set; }
         }
 
         [SetUp]
@@ -40,7 +44,18 @@ namespace MongoRepository.Tests
         public void TestCountOne()
         {
             var repository = new MongoRepository<ClassTest>(Configuration.TestCollection);
-            repository.Add(new ClassTest());
+
+            var classTest = new ClassTest()
+                {
+                    IntProperty = 10,
+                    ChildClassTests = new List<ChildClassTest>()
+                        {
+                            new ChildClassTest() {StringProperty = "first string"},
+                            new ChildClassTest() {StringProperty = "second string"}
+                        }
+                };
+
+            repository.Add(classTest);
 
             var count = repository.Count();
 
