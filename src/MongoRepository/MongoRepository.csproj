@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ICollectionConfiguration.cs" />
+    <Compile Include="Configuration\IDatabaseConfiguration.cs" />
     <Compile Include="Exceptions\MongoRepositoryException.cs" />
     <Compile Include="ObjectModel\Entity.cs" />
     <Compile Include="ObjectModel\IEntity.cs" />

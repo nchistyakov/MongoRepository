@@ -12,25 +12,25 @@ namespace MongoRepository.Managers
         public CollectionManager(MongoDatabase mongoDatabase)
             : this(mongoDatabase, new DefaultCollectionNaming()) { }
 
-        public CollectionManager(MongoDatabase mongoDatabase, DefaultCollectionNaming collectionNaming)
+        public CollectionManager(MongoDatabase mongoDatabase, ICollectionNamingStrategy collectionNamingStrategy)
         {
             if (mongoDatabase == null)
             {
                 throw new ArgumentException("mongoDatabase");
             }
 
-            if (collectionNaming == null)
+            if (collectionNamingStrategy == null)
             {
-                throw new ArgumentException("collectionNaming");
+                throw new ArgumentException("collectionNamingStrategy");
             }
 
             _mongoDatabase = mongoDatabase;
-            _namingStrategy = collectionNaming;
+            _namingStrategy = collectionNamingStrategy;
         }
 
         public MongoCollection<TEntity> GetCollection<TEntity>()
         {
-            var collectionName = _namingStrategy.Apply(typeof (TEntity).Name);
+            var collectionName = _namingStrategy.Apply(typeof(TEntity).Name);
             return _mongoDatabase.GetCollection<TEntity>(collectionName);
         }
     }
