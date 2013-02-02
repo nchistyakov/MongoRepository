@@ -1,36 +1,38 @@
 ﻿using System;
 using MongoDB.Driver;
-using MongoRepository.Conventions;
+using MongoRepository.Configurations;
 
 namespace MongoRepository.Managers
 {
     public class CollectionManager : ICollectionManager
     {
         private MongoDatabase _mongoDatabase;
-        private ICollectionNamingStrategy _namingStrategy;
+        private FluentConfiguration _fluentConfiguration;
 
         public CollectionManager(MongoDatabase mongoDatabase)
-            : this(mongoDatabase, new DefaultCollectionNaming()) { }
+            : this(mongoDatabase, new FluentConfiguration()) { }
 
-        public CollectionManager(MongoDatabase mongoDatabase, ICollectionNamingStrategy collectionNamingStrategy)
+        public CollectionManager(MongoDatabase mongoDatabase, FluentConfiguration fluentConfiguration)
         {
             if (mongoDatabase == null)
             {
                 throw new ArgumentException("mongoDatabase");
             }
 
-            if (collectionNamingStrategy == null)
+            if (fluentConfiguration == null)
             {
-                throw new ArgumentException("collectionNamingStrategy");
+                throw new ArgumentException("fluentConfiguration");
             }
 
             _mongoDatabase = mongoDatabase;
-            _namingStrategy = collectionNamingStrategy;
+            _fluentConfiguration = fluentConfiguration;
         }
 
         public MongoCollection<TEntity> GetCollection<TEntity>()
         {
-            var collectionName = _namingStrategy.Apply(typeof(TEntity).Name);
+            var namingStrategy = _fluentConfiguration.GetCollectionNamingStrategy();
+            
+            var collectionName = namingStrategy.Apply(typeof(TEntity).Name);
             return _mongoDatabase.GetCollection<TEntity>(collectionName);
         }
     }

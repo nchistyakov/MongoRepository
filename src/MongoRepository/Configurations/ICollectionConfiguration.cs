@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoRepository.Conventions;
 
-namespace MongoRepository.Configuration
+namespace MongoRepository.Configurations
 {
-    interface ICollectionConfiguration
+    public interface ICollectionConfiguration
     {
         ICollectionNamingStrategy CollectionNamingStrategy { get; set; }
     }

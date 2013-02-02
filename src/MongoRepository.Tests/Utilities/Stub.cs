@@ -1,7 +1,7 @@
 ﻿using System;
 using Rhino.Mocks;
 
-namespace MongoRepository.Tests.Utils
+namespace MongoRepository.Tests.Utilities
 {
     public static class Stub<T> where T : class
     {

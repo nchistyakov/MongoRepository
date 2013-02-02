@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MongoRepository.Configuration
+namespace MongoRepository.Configurations
 {
-    interface IDatabaseConfiguration
+    public interface IDatabaseConfiguration
     {
     }
 }

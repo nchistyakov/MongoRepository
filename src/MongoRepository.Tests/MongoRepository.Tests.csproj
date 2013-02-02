@@ -58,8 +58,8 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="RepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\Stub.cs" />
-    <Compile Include="Utils\Mock.cs" />
+    <Compile Include="Utilities\Stub.cs" />
+    <Compile Include="Utilities\Mock.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
