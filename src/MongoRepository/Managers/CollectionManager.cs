@@ -30,10 +30,20 @@ namespace MongoRepository.Managers
 
         public MongoCollection<TEntity> GetCollection<TEntity>()
         {
-            var namingStrategy = _fluentConfiguration.GetCollectionNamingStrategy();
-            
-            var collectionName = namingStrategy.Apply(typeof(TEntity).Name);
+            var collectionName = this.GetCollectionName<TEntity>();
             return _mongoDatabase.GetCollection<TEntity>(collectionName);
         }
+
+        #region Private methods
+
+        private string GetCollectionName<TEntity>()
+        {
+            var namingStrategy = _fluentConfiguration.GetCollectionNamingStrategy();
+            var collectionName = namingStrategy.Apply(typeof(TEntity).Name);
+
+            return collectionName;
+        }
+
+        #endregion
     }
 }

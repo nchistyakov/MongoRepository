@@ -10,6 +10,10 @@ using MongoRepository.ObjectModel;
 
 namespace MongoRepository.Repository
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class MongoRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
         private readonly MongoCollection<TEntity> _collection;

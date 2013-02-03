@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using MongoRepository.Conventions;
 
 namespace MongoRepository.Configurations
@@ -19,10 +15,9 @@ namespace MongoRepository.Configurations
             throw new NotImplementedException();
         }
 
-        public ICollectionNamingStrategy GetCollectionNamingStrategy()
+        public virtual ICollectionNamingStrategy GetCollectionNamingStrategy()
         {
             return this.CollectionConfiguration.CollectionNamingStrategy;
-
         }
     }
 }
