@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\DefaultCollectionConfiguration.cs" />
     <Compile Include="Configurations\FluentConfiguration.cs" />
     <Compile Include="Configurations\ICollectionConfiguration.cs" />
     <Compile Include="Configurations\IDatabaseConfiguration.cs" />

@@ -15,6 +15,12 @@ namespace MongoRepository.Configurations
             throw new NotImplementedException();
         }
 
+        public FluentConfiguration()
+        {
+            this.CollectionConfiguration = new DefaultCollectionConfiguration();
+            this.DatabaseConfiguration = new DefaultDatabaseConfiguration();
+        }
+
         public virtual ICollectionNamingStrategy GetCollectionNamingStrategy()
         {
             return this.CollectionConfiguration.CollectionNamingStrategy;
